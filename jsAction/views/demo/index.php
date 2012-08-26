@@ -9,21 +9,55 @@ $app = Yii::app();
 
 
 <p>
-  Simple Demo about jsAction...
+  So this is a very simple demo.
 </p>
 
 <p>
-  <button class="action_enableAction1">Enable Action 1</button>
+  Basic idea about the JsActions is, that you can trigger actions from <b>somewhere</b>.
+  Actions will emit <b>signals</b> when they change state or actually get triggered.
+  You can <b>connect</b> as many <b>callbacks</b> as you want to each <b>signal</b>.
+</p>
+
+<p>
+  This way, an application can define what <b>actions</b> a user might execute
+  on a certain page, and it can register event handlers that care for the actual
+  execution. The whole process does no longer depend on any actual html markup.
+</p>
+
+<p>
+  You can try it by using the UI below, or you can open a console and trigger
+  the actions manually.
+
+  <pre>
+    // trigger action1
+    JsAction.Action("action1").trigger();
+
+    // disable action1
+    JsAction.Action("action1").setEnabled( false );
+
+    // enable action1
+    JsAction.Action("action1").setEnabled( true );
+  </pre>
+</p>
+
+<p>
+  html elements providing an UI to access JsActions should listen to the actions
+  <b>changed()</b> signal and update their appeareance to reflect the state of
+  an action. But they need no knowledge about any other html elements.
+</p>
+
+<p>
+  <button class="action_enableAction1" disabled="disabled">Enable Action 1</button>
   <button class="action_disableAction1">Disable Action 1</button>
 
   &nbsp;&nbsp;&nbsp;
 
-  <button class="action_enableAction2">Enable Action 2</button>
+  <button class="action_enableAction2" disabled="disabled">Enable Action 2</button>
   <button class="action_disableAction2">Disable Action 2</button>
 
   &nbsp;&nbsp;&nbsp;
 
-  <button class="action_enableAction3">Enable Action 3</button>
+  <button class="action_enableAction3" disabled="disabled">Enable Action 3</button>
   <button class="action_disableAction3">Disable Action 3</button>
 </p>
 
