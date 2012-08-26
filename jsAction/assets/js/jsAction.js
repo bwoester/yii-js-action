@@ -194,6 +194,34 @@ JsAction.ActionImpl = (function() {
       d.whatIsThis = value;
       this.emit( JsAction.SIG_CHANGED );
     }
+
+    this.setData = function( options )
+    {
+      var allSame = true;
+
+      for (propertyName in options)
+      {
+        if (!(propertyName in d)) {
+          throw "An action has no property '"+propertyName+"'.";
+        }
+        else
+        {
+          if (d[propertyName] === options[propertyName]) {
+            continue;
+          }
+
+          d[propertyName] = options[propertyName];
+          allSame = false;
+        }
+      }
+
+      if (allSame) {
+        return;
+      }
+
+      this.emit( JsAction.SIG_CHANGED );
+    }
+
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -211,6 +239,10 @@ JsAction.ActionImpl = (function() {
   ////////////////////////////////////////////////////////////////////////////
 
   ActionImpl.prototype.trigger = function() {
+    if (!this.isEnabled()) {
+      return;
+    }
+    
     this.emit( JsAction.SIG_TRIGGERED, this.isChecked() );
   };
 
@@ -234,15 +266,15 @@ JsAction.ActionImpl = (function() {
 
 JsAction.Actions = {};
 
-JsAction.Action = function( actionId )
+JsAction.Action = function( actionId, options )
 {
   var action = actionId && JsAction.Actions[ actionId ];
 
   if (!action)
   {
-    action = new JsAction.ActionImpl({
-      id: actionId
-    });
+    options = options || {};
+    options.id = actionId;
+    action = new JsAction.ActionImpl( options );
 
     if (actionId) {
       JsAction.Actions[ actionId ] = action;
