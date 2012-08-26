@@ -68,6 +68,11 @@ $cs->registerCss('disabledLinks', '
 </p>
 
 <p>
+  The buttons and links used in this demo only reflect changes to an actions
+  enabled and text property.
+</p>
+
+<p>
   <?php
   $this->widget( '_jsAction.widgets.JsActionButton', array(
     'action' => 'action_enableAction1',

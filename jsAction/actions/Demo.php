@@ -55,9 +55,9 @@ class Demo extends CViewAction
       'text'  => 'Disable Action 3',
     ));
 
-    $jsActions->connect( 'action1', JsActions::SIG_TRIGGERED, 'function() { alert( "Action 1 triggered!" ); }');
-    $jsActions->connect( 'action2', JsActions::SIG_TRIGGERED, 'function() { alert( "Action 2 triggered!" ); }');
-    $jsActions->connect( 'action3', JsActions::SIG_TRIGGERED, 'function() { alert( "Action 3 triggered!" ); }');
+    $jsActions->connect( 'action1', JsActions::SIG_TRIGGERED, 'function() { $("body").css("background", "#000"); }');
+    $jsActions->connect( 'action2', JsActions::SIG_TRIGGERED, 'function() { $("body").css("background", "#888"); }');
+    $jsActions->connect( 'action3', JsActions::SIG_TRIGGERED, 'function() { $("body").css("background", "#EEE"); }');
 
     $jsActions->connect( 'action_enableAction1', JsActions::SIG_TRIGGERED, 'function() {
       JsAction.Action("action1").setEnabled(true);
