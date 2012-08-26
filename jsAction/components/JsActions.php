@@ -124,10 +124,6 @@ class JsActions extends CApplicationComponent
 
     // --- actions ------------------------------------------------------------
 
-    $script .= '
-    (function() {
-    ';
-
     foreach ($this->getActions() as $id => $action)
     {
       $options = CJSON::encode( $action );
@@ -135,10 +131,6 @@ class JsActions extends CApplicationComponent
         JsAction.Action( "'.$id.'" ).setData( '.$options.' );
       ';
     }
-
-    $script .= '
-    })();
-    ';
 
     // --- triggers -----------------------------------------------------------
 
