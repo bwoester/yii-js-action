@@ -6,6 +6,23 @@ $jsActions = $app->jsActions;
 /* @var $this CController */
 /* @var $app CWebApplication */
 /* @var $jsActions JsActions */
+
+/* @var $cs CClientScript */
+$cs = $app->getClientScript();
+$cs->registerCss('disabledLinks', '
+
+  a {
+    margin: 5px;
+  }
+
+  a.JsActionLink-disabled {
+    cursor: default;
+    text-decoration: none;
+    color: #DDD;
+  }
+
+');
+
 ?>
 
 
@@ -38,6 +55,9 @@ $jsActions = $app->jsActions;
 
     // enable action1
     JsAction.Action("action1").setEnabled( true );
+
+    // change action1's text
+    JsAction.Action("action1").setText( "Hello world!" );
   </pre>
 </p>
 
@@ -124,58 +144,47 @@ $jsActions = $app->jsActions;
 </p>
 
 <p>
-  <a href="#" class="action_1">Action 1</a>
-  <a href="#" class="action_2">Action 2</a>
-  <a href="#" class="action_3">Action 3</a>
+
+  <?php
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action1',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action2',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action3',
+  ));
+  ?>
 
   &nbsp;&nbsp;&nbsp;
 
-  <a href="#" class="action_1">Action 1</a>
-  <a href="#" class="action_2">Action 2</a>
-  <a href="#" class="action_3">Action 3</a>
+  <?php
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action1',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action2',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action3',
+  ));
+  ?>
 
   &nbsp;&nbsp;&nbsp;
 
-  <a href="#" class="action_1">Action 1</a>
-  <a href="#" class="action_2">Action 2</a>
-  <a href="#" class="action_3">Action 3</a>
+  <?php
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action1',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action2',
+  ));
+  $this->widget( '_jsAction.widgets.JsActionLink', array(
+    'action' => 'action3',
+  ));
+  ?>
 </p>
 
 <?php
-
-/* @var $am CAssetManager */
-$am = $app->getAssetManager();
-/* @var $cs CClientScript */
-$cs = $app->getClientScript();
-$cs->registerCss('disabledLinks', '
-
-  a.disabled {
-    pointer-events: none;
-    cursor: default;
-    text-decoration: none;
-    color: #DDD;
-  }
-
-');
-
-$cs->registerScript( 'jsAction', '
-
-  // Publishers
-  $(".action_1").click( function(ev) {
-    JsAction.Action("action1").trigger();
-    return false;
-  });
-
-  $(".action_2").click( function(ev) {
-    JsAction.Action("action2").trigger();
-    return false;
-  });
-
-  $(".action_3").click( function(ev) {
-    JsAction.Action("action3").trigger();
-    return false;
-  });
-
-');
-
 $jsActions->registerActions();

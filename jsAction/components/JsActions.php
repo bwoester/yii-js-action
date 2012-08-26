@@ -155,6 +155,7 @@ class JsActions extends CApplicationComponent
         $script .= "
           $('$selector').on( '$elementEvent', function() {
             JsAction.Action( '$jsActionId' ).trigger();
+            return false;
           });
         ";
       }
